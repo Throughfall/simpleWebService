@@ -1,20 +1,11 @@
+// Das node-eigene Modul "http" einbinden
 const http = require('http');
 
-// kleiner Webserver
-const server  = http.createServer((req, res) => {
-    // Zusätzlich Anweisung um einen Header zu übergeben,
-    // dass der Ausgabetext vom Browser als HMTL interpretiert wird
-    res.writeHead(200, {
-        'content-type': 'text/html'
-    });
-    // Tue etwas bzw. gebe etwas wieder...
-    // und hänge noch dran, um welche Methode es sich handelt
-    // und welche url aufgerufen wurde
-    res.write('Hallo HTTP! ' + req.method + ' ' + req.url);
+// Das eigene Modul "handle" einbinden
+const handle = require('./handle');
 
-    // die Verbindung zum Server wird wieder geschlossen
-    res.end();
-});
+// kleiner Webserver, der die handle-Funktion abruft/ausführt 
+const server  = http.createServer(handle);
 
 server.listen(3000, () => 
 {
