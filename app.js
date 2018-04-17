@@ -1,11 +1,16 @@
 // Das node-eigene Modul "http" einbinden
 const http = require('http');
 
-// Das eigene Modul "handle" einbinden
-const handle = require('./handle');
+const express = require('express');
+
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('Hallo Node.js!');
+});
 
 // kleiner Webserver, der die handle-Funktion abruft/ausführt 
-const server  = http.createServer(handle);
+const server  = http.createServer(app)
 
 server.listen(3000, () => 
 {
